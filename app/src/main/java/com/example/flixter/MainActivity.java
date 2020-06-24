@@ -1,18 +1,22 @@
 package com.example.flixter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.flixter.adapters.MovieAdapter;
 import com.example.flixter.models.Movie;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
@@ -23,10 +27,20 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
     List<Movie> movies;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        movies = new ArrayList<Movie>();
+        RecyclerView rvMovies = findViewById(R.id.rvMovies);
+        //create adapter
+        final MovieAdapter adapter = new MovieAdapter(this, movies);
+        //set adapter on recycler view
+        rvMovies.setAdapter(adapter);
+        //set layout manager
+        rvMovies.setLayoutManager(new LinearLayoutManager(this));
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(NOW_PLAYING_URL, new JsonHttpResponseHandler() {
             @Override
@@ -36,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
                     Log.i(TAG, "Results: " + results.toString());
-                    movies = Movie.fromJSONArray(results);
+                    movies.addAll(Movie.fromJSONArray(results));
+                    adapter.notifyDataSetChanged();
                     Log.i(TAG, "Movies: " + movies.size());
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit json exception", e);
