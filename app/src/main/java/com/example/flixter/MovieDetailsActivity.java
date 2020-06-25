@@ -23,6 +23,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
+        assert movie != null;
         Log.d("MovieDetails", "Showing details for: " + movie.getTitle());
         tvTitle = findViewById(R.id.tvTitle);
         tvOverview = findViewById(R.id.tvOverview);
@@ -31,6 +32,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
         float rating = movie.getVoteAverage().floatValue();
-        rbRatings.setRating(rating = rating > 0 ? rating / 2.0f : rating);
+        rbRatings.setRating(rating > 0 ? rating / 2.0f : rating);
     }
 }

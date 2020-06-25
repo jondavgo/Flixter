@@ -14,17 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.flixter.MainActivity;
 import com.example.flixter.MovieDetailsActivity;
 import com.example.flixter.R;
 import com.example.flixter.models.Movie;
 
 import org.parceler.Parcels;
-import org.w3c.dom.Text;
 
 import java.util.List;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 

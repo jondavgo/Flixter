@@ -26,7 +26,7 @@ public class Movie {
 
     public Movie(){ }
     public static List<Movie> fromJSONArray(JSONArray array) throws JSONException {
-        List<Movie> movies = new ArrayList<Movie>();
+        List<Movie> movies = new ArrayList<>();
         for(int i = 0; i < array.length(); i++){
             movies.add(new Movie(array.getJSONObject(i)));
         }
