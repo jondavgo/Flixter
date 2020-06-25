@@ -21,6 +21,8 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
     Context context;
@@ -70,12 +72,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
             String imageURL;
+            int placeholder;
             if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
                 imageURL = movie.getBackdropPath();
+                placeholder = R.drawable.flicks_backdrop_placeholder;
             } else {
                 imageURL = movie.getPosterPath();
+                placeholder = R.drawable.flicks_movie_placeholder;
             }
-            Glide.with(context).load(imageURL).into(ivPoster);
+            Glide.with(context)
+                    .load(imageURL)
+                    //.transform(new RoundedCornersTransformation(30, 0))
+                    .placeholder(placeholder)
+                    .into(ivPoster);
         }
     }
 }
