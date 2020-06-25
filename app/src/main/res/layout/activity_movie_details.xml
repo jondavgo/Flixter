@@ -14,12 +14,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:gravity="center"
         android:textAppearance="@android:style/TextAppearance.Large"
         tools:text="Movie Title" />
 
     <RatingBar
         android:id="@+id/rbRating"
-        style="@style/Widget.AppCompat.RatingBar.Small"
+        style="@android:style/Widget.DeviceDefault.RatingBar.Indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
@@ -40,4 +41,21 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
         tools:text="Movie Overview and whatnot, nothing special" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvOverview"
+        android:layout_below="@+id/tvTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/rbRating"
+        android:gravity="center_vertical|end"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="20sp"
+        tools:text="Released: 09/27/2000" />
 </RelativeLayout>

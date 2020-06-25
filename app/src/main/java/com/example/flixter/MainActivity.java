@@ -10,6 +10,7 @@ import android.util.Log;
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.flixter.adapters.MovieAdapter;
+import com.example.flixter.databinding.ActivityMainBinding;
 import com.example.flixter.models.Movie;
 
 import org.json.JSONArray;
@@ -31,9 +32,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         movies = new ArrayList<>();
-        RecyclerView rvMovies = findViewById(R.id.rvMovies);
+        RecyclerView rvMovies = binding.rvMovies;
         //create adapter
         final MovieAdapter adapter = new MovieAdapter(this, movies);
         //set adapter on recycler view
