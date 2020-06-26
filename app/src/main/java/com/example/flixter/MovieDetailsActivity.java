@@ -2,20 +2,31 @@ package com.example.flixter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.res.Configuration;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.asynchttpclient.AsyncHttpClient;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.flixter.databinding.ActivityMovieDetailsBinding;
 import com.example.flixter.models.Movie;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import okhttp3.Headers;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
@@ -52,5 +63,38 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 .transform(new RoundedCornersTransformation(30, 10))
                 .placeholder(placeholder)
                 .into(ivPoster);
+        ivPoster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = String.format("https://api.themoviedb.org/3/movie/%s/videos?api_key=13f4a0b4abdb785e3abfdf4c8e005152&language=en-US", movie.getId());
+                AsyncHttpClient client = new AsyncHttpClient();
+
+                client.get(url, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Headers headers, JSON json) {
+                        JSONObject jsonObject = json.jsonObject;
+                        try {
+                            JSONArray results = jsonObject.getJSONArray("results");
+                            JSONObject thing = results.getJSONObject(0);
+                            next(thing.getString("key"));
+                        } catch (JSONException e) {
+                            Log.e("MovieDetailsActivity", "Hit json exception", e);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                        Log.d("MovieDetailsActivity", "onFailure");
+                    }
+                });
+            }
+        });
+
+    }
+
+    private void next(String key) {
+        Intent intent = new Intent(this, MovieTrailerActivity.class);
+        intent.putExtra("key", key);
+        startActivity(intent);
     }
 }

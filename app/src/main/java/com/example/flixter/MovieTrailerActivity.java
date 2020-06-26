@@ -19,7 +19,7 @@ public class MovieTrailerActivity extends YouTubeBaseActivity {
         ActivityMovieTrailerBinding binding = ActivityMovieTrailerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        final String videoId = "tKodtNFpzBA";
+        final String videoId = getIntent().getStringExtra("key");
 
         YouTubePlayerView playerView = binding.player;
         playerView.initialize(getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {

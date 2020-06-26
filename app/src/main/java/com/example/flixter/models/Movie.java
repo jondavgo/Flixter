@@ -61,4 +61,8 @@ public class Movie {
     public String getReleaseDate() {
         return releaseDate;
     }
+
+    public Integer getId() {
+        return id;
+    }
 }
