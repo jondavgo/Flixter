@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.codepath.asynchttpclient.AsyncHttpClient;
@@ -36,6 +37,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     TextView tvDate;
     RatingBar rbRatings;
     ImageView ivPoster;
+    String key;
+    String site;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,38 +66,44 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 .transform(new RoundedCornersTransformation(30, 10))
                 .placeholder(placeholder)
                 .into(ivPoster);
+
+        String url = String.format("https://api.themoviedb.org/3/movie/%s/videos?api_key=13f4a0b4abdb785e3abfdf4c8e005152&language=en-US", movie.getId());
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(url, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    key = jsonObject.getJSONArray("results").getJSONObject(0).getString("key");
+                    site = jsonObject.getJSONArray("results").getJSONObject(0).getString("site");
+                } catch (JSONException e) {
+                    Log.e("MovieDetailsActivity", "Hit json exception", e);
+                    key = "";
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.d("MovieDetailsActivity", "onFailure");
+            }
+        });
+
         ivPoster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = String.format("https://api.themoviedb.org/3/movie/%s/videos?api_key=13f4a0b4abdb785e3abfdf4c8e005152&language=en-US", movie.getId());
-                AsyncHttpClient client = new AsyncHttpClient();
-
-                client.get(url, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        JSONObject jsonObject = json.jsonObject;
-                        try {
-                            JSONArray results = jsonObject.getJSONArray("results");
-                            JSONObject thing = results.getJSONObject(0);
-                            next(thing.getString("key"));
-                        } catch (JSONException e) {
-                            Log.e("MovieDetailsActivity", "Hit json exception", e);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.d("MovieDetailsActivity", "onFailure");
-                    }
-                });
+                if(!key.equals("") && site.equals("YouTube")) {
+                    Intent intent = new Intent(getApplicationContext(), MovieTrailerActivity.class);
+                    intent.putExtra("key", key);
+                    startActivity(intent);
+                } else {
+                    failToast();
+                }
             }
         });
 
     }
 
-    private void next(String key) {
-        Intent intent = new Intent(this, MovieTrailerActivity.class);
-        intent.putExtra("key", key);
-        startActivity(intent);
+    private void failToast() {
+        Toast.makeText(getApplicationContext(),"Video Unavailable! :(", Toast.LENGTH_SHORT).show();
     }
 }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
     <RelativeLayout
@@ -78,6 +79,23 @@
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
             android:contentDescription="@string/app_name"
+            android:onClick="onClick"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/tvTitle"
+            android:layout_alignBottom="@+id/ivPoster"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="75dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/playbutton" />
     </RelativeLayout>
 </ScrollView>
