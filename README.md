@@ -34,9 +34,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.imgur.com/oBzpaOy.gif' title='Video Walkthrough (Portrait)' width='' alt='Video Walkthrough (Portrait)' />
-
-<img src='https://i.imgur.com/AsuVqs3.gif' title='Video Walkthrough (Landscape)' width='' alt='Video Walkthrough (Landscape)' />
+<img src='https://github.com/jondavgo/Flixter/blob/master/Movies.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [Kap](http://www.getkap.co).
 
