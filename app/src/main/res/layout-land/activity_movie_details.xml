@@ -81,7 +81,6 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
         android:contentDescription="@string/app_name"
-        android:onClick="onClick"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView

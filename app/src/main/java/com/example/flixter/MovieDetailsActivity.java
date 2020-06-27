@@ -39,6 +39,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     ImageView ivPoster;
     String key;
     String site;
+    ImageView playButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         rbRatings = binding.rbRating;
         tvDate = binding.tvDate;
         ivPoster = binding.ivPoster;
+        playButton = binding.imageView;
 
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
@@ -76,15 +78,18 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 try {
                     key = jsonObject.getJSONArray("results").getJSONObject(0).getString("key");
                     site = jsonObject.getJSONArray("results").getJSONObject(0).getString("site");
+                    playButton.setVisibility(View.VISIBLE);
                 } catch (JSONException e) {
                     Log.e("MovieDetailsActivity", "Hit json exception", e);
                     key = "";
+                    playButton.setVisibility(View.INVISIBLE);
                 }
             }
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                 Log.d("MovieDetailsActivity", "onFailure");
+                playButton.setVisibility(View.INVISIBLE);
             }
         });
 
