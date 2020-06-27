@@ -40,7 +40,7 @@
             android:id="@+id/tvOverview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rbRating"
+            android:layout_below="@+id/tvPop"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="10dp"
@@ -54,13 +54,11 @@
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/tvOverview"
             android:layout_below="@+id/ivPoster"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="0dp"
             android:layout_toEndOf="@+id/rbRating"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -96,5 +94,20 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/app_name"
             app:srcCompat="@drawable/playbutton" />
+
+        <TextView
+            android:id="@+id/tvPop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvDate"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/rbRating"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#FFFFFF"
+            tools:text="Popularity: 12.345" />
     </RelativeLayout>
 </ScrollView>

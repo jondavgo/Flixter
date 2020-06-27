@@ -17,6 +17,7 @@ public class Movie {
     String releaseDate;
     Double voteAverage;
     Integer id;
+    Double popularity;
 
     public Movie(JSONObject j) throws JSONException {
         posterPath = j.getString("poster_path");
@@ -26,6 +27,7 @@ public class Movie {
         overview = j.getString("overview");
         releaseDate = j.getString("release_date");
         id = j.getInt("id");
+        popularity = j.getDouble("popularity");
     }
 
     public Movie(){ }
@@ -64,5 +66,9 @@ public class Movie {
 
     public Integer getId() {
         return id;
+    }
+
+    public Double getPopularity() {
+        return popularity;
     }
 }

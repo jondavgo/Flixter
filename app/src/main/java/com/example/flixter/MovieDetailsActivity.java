@@ -37,6 +37,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     TextView tvDate;
     RatingBar rbRatings;
     ImageView ivPoster;
+    TextView tvPop;
     String key;
     String site;
     ImageView playButton;
@@ -55,9 +56,11 @@ public class MovieDetailsActivity extends AppCompatActivity {
         tvDate = binding.tvDate;
         ivPoster = binding.ivPoster;
         playButton = binding.imageView;
+        tvPop = binding.tvPop;
 
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
+        tvPop.setText(String.format("Popularity: %s/100", movie.getPopularity()));
         float rating = movie.getVoteAverage().floatValue();
         rbRatings.setRating(rating > 0 ? rating / 2.0f : rating);
         tvDate.setText(String.format("Released: %s", movie.getReleaseDate()));
