@@ -34,13 +34,13 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://imgur.com/a/BUCqdu3' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [Kap](http://www.getkap.co).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I think this has helped me get a better grip on RecyclerView and all of its quirks. Sylizing the UI was probably the most unusual task simply due to my lack of knowledge in xml compared to java, but besides that trying to implement the YouTube API was probably the most challenging piece simply because there was a lot of information to parse and there were many ways to implement the system.
 
 ## Open-source libraries used
 
